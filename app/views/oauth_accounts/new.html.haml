@@ -1,0 +1,10 @@
+.container
+  .text-center
+    %h2 Stripe Connect
+    - if params[:code]
+      = simple_form_for(resource) do |f|
+        = f.input(:authorization_code, as: :hidden, input_html: { value: params[:code] })
+        %button.btn.btn-primary
+          Authorize
+    - else
+      = link_to("Connect with Stripe", "https://dashboard.stripe.com/oauth/authorize?response_type=code&client_id=ca_ER8ueDW37SXVRg4S3yTxeh21RQESx7KL&scope=read_write", class: "btn btn-primary")

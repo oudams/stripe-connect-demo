@@ -10,6 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2019_01_31_105714) do
+
+  create_table "oauth_accounts", force: :cascade do |t|
+    t.string "access_token"
+    t.boolean "livemode"
+    t.string "refresh_token"
+    t.string "token_type"
+    t.string "stripe_publishable_key"
+    t.string "stripe_user_id"
+    t.string "scope"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end
