@@ -1,5 +1,9 @@
 class OauthAccountsController < ApplicationController
-  def new; end
+  def new
+    # register the redirect URI as http://localhost:3000/oauth_accounts/new
+    # capture the error description if any
+    flash[:notice] = params[:error_description] if params[:error]
+  end
 
   def create
     stripe_oauth = create_stripe_oauth(params[:oauth_account][:authorization_code])
@@ -7,11 +11,14 @@ class OauthAccountsController < ApplicationController
     if stripe_oauth
       @oauth_account = OauthAccount.new(stripe_oauth)
 
-      binding.pry
       flash[:success] = "Oauth Account is created." if @oauth_account.save
     end
 
     render :new
+  end
+
+  def index
+    @resources = OauthAccount.order(created_at: :desc)
   end
 
   private

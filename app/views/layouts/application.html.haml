@@ -10,6 +10,11 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
     .container
+      %p
+      .btn-toolbar.pull-right
+        = link_to("New Charge", new_charge_path, class: "btn btn-success")
+        = link_to("New Stripe Connect", new_oauth_account_path, class: "btn btn-success")
+        = link_to("Connected Accounts", oauth_accounts_path, class: "btn btn-success")
       .text-center
         - flash.each do |type, message|
           #flash.alert.alert-dismissible.fade.in{:class => "alert"}
@@ -17,4 +22,5 @@
         - unless resource&.errors.blank?
           = resource&.errors&.each do |e|
             = e.to_s
-    = yield
+    .container
+      = yield

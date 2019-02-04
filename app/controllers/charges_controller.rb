@@ -1,5 +1,5 @@
 class ChargesController < ApplicationController
-  helper_method :charge
+  helper_method :charge, :connected_account
 
   def new; end
 
@@ -23,10 +23,14 @@ class ChargesController < ApplicationController
   end
 
   def permitted_params
-    params.permit(new_charge: %i[token amount])
+    params.permit(new_charge: %i[token amount stripe_user_id])
   end
 
   def resource
     charge
+  end
+
+  def connected_account
+    @connected_account = OauthAccount.order(:created_at).last
   end
 end
