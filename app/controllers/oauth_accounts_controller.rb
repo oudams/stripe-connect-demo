@@ -34,8 +34,8 @@ class OauthAccountsController < ApplicationController
       "/oauth/token",
       {
         "code" => authorization_code,
-        "client_id" => "WMga96SzJu47v8qOmMjwAvz8Kt4IGmutlGZUj8mdKxg",
-        "client_secret" => "Rd0tRF-Vv9DcrixmIAOndAwRUGxAjd04Zzve0bzoDfw",
+        "client_id" => "lGa-PUDZY79OA-7qgJfTrORo0gpbRJd6Vv0oEBb3B1Q",
+        "client_secret" => "gMCoeQCisuR7FRBtuNGaV7_vRutGgAZO3e_8T77GQfg",
         "redirect_uri" => "http://localhost:3001/oauth_accounts/new",
         "grant_type" => "authorization_code"
       }

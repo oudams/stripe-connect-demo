@@ -1,3 +1,7 @@
+
+- if @oauth_account
+  %pre
+    = JSON.pretty_generate(JSON.parse(@oauth_account.to_json))
 .text-center
   %h2 Stripe Connect
   - if params[:code]
@@ -7,4 +11,4 @@
         Authorize
   - else
     -# = link_to("Connect with Stripe", "https://dashboard.stripe.com/oauth/authorize?response_type=code&client_id=ca_ER8ueDW37SXVRg4S3yTxeh21RQESx7KL&scope=read_write", class: "btn btn-primary")
-    = link_to("Connect with Bongloy", "http://localhost:3000/oauth/authorize?client_id=WMga96SzJu47v8qOmMjwAvz8Kt4IGmutlGZUj8mdKxg&redirect_uri=http%3A%2F%2Flocalhost%3A3001%2Foauth_accounts%2Fnew&response_type=code", class: "btn btn-primary")
+    = link_to("Connect with Bongloy", "http://localhost:3000/oauth/authorize?client_id=lGa-PUDZY79OA-7qgJfTrORo0gpbRJd6Vv0oEBb3B1Q&redirect_uri=http%3A%2F%2Flocalhost%3A3001%2Foauth_accounts%2Fnew&response_type=code", class: "btn btn-primary")
