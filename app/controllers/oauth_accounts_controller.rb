@@ -6,10 +6,11 @@ class OauthAccountsController < ApplicationController
   end
 
   def create
-    stripe_oauth = create_stripe_oauth(params[:oauth_account][:authorization_code])
+    # oauth = create_stripe_oauth(params[:oauth_account][:authorization_code])
+    oauth = create_bongloy_oauth(params[:oauth_account][:authorization_code])
 
-    if stripe_oauth
-      @oauth_account = OauthAccount.new(stripe_oauth)
+    if oauth
+      @oauth_account = OauthAccount.new(oauth)
 
       flash[:success] = "Oauth Account is created." if @oauth_account.save
     end
@@ -22,6 +23,29 @@ class OauthAccountsController < ApplicationController
   end
 
   private
+
+  def create_bongloy_oauth(authorization_code)
+    conn = Faraday.new(url: "http://localhost:3000") do |f|
+      f.request  :url_encoded
+      f.adapter  Faraday.default_adapter
+    end
+
+    response = conn.post(
+      "/oauth/token",
+      {
+        "code" => authorization_code,
+        "client_id" => "WMga96SzJu47v8qOmMjwAvz8Kt4IGmutlGZUj8mdKxg",
+        "client_secret" => "Rd0tRF-Vv9DcrixmIAOndAwRUGxAjd04Zzve0bzoDfw",
+        "redirect_uri" => "http://localhost:3001/oauth_accounts/new",
+        "grant_type" => "authorization_code"
+      }
+    )
+
+    return JSON.parse(response.body) if response.success?
+
+    flash[:notice] = "Unable to create oauth token"
+    false
+  end
 
   def create_stripe_oauth(authorization_code)
     conn = Faraday.new(url: "https://connect.stripe.com") do |f|

@@ -17,9 +17,10 @@ ActiveRecord::Schema.define(version: 2019_01_31_105714) do
     t.boolean "livemode"
     t.string "refresh_token"
     t.string "token_type"
-    t.string "stripe_publishable_key"
-    t.string "stripe_user_id"
+    t.string "bongloy_publishable_key"
+    t.string "bongloy_account_id"
     t.string "scope"
+    t.integer "expires_in"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
