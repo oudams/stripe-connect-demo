@@ -7,8 +7,6 @@
     %label{:for => "card-element"}
       Credit or debit card
     = simple_form_for(:new_charge, url: charges_path, :html => { name: "element_form" }) do |f|
-      = f.input(:amount, as: :hidden, input_html: { value: 500 })
-      = f.input(:stripe_user_id, as: :hidden, input_html: { value: connected_account.stripe_user_id })
       .form-group
         #card-element
         #card-errors{:role => "alert"}

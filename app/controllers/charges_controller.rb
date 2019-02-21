@@ -4,7 +4,7 @@ class ChargesController < ApplicationController
   def new; end
 
   def create
-    @charge = Charge.new(permitted_params[:new_charge])
+    @charge = Charge.new(token: params["new_charge"]["token"], connected_account: connected_account)
 
     if @charge.save
       redirect_to(
@@ -20,10 +20,6 @@ class ChargesController < ApplicationController
 
   def charge
     @charge ||= Charge.new
-  end
-
-  def permitted_params
-    params.permit(new_charge: %i[token amount stripe_user_id])
   end
 
   def resource

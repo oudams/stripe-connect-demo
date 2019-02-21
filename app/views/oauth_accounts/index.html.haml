@@ -1,6 +1,6 @@
 %p
 .row
   %ul
-    - @resources.each do |r|
+    -# - @resources.each do |r|
       %li
         = "##{r.id} | acc: #{r.stripe_user_id } | sk: #{r.access_token} | pk: #{r.stripe_publishable_key}"
